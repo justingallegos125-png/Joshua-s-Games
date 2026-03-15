@@ -11,7 +11,7 @@ export default function App() {
   
   // Cloaking State
   const [cloakTitle, setCloakTitle] = useState(localStorage.getItem('cloakTitle') || "JOSHUA'S ARCADE");
-  const [cloakFavicon, setCloakFavicon] = useState(localStorage.getItem('cloakFavicon') || "");
+  const [cloakFavicon, setCloakFavicon] = useState(localStorage.getItem('cloakFavicon') || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='yellow'/%3E%3Ccircle cx='35' cy='40' r='5' fill='black'/%3E%3Ccircle cx='65' cy='40' r='5' fill='black'/%3E%3Cpath d='M 30 65 Q 50 80 70 65' stroke='black' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
   
   // Customization State
   const [accentColor, setAccentColor] = useState(localStorage.getItem('accentColor') || "#ffffff");
@@ -62,7 +62,7 @@ export default function App() {
   };
 
   const presets = [
-    { name: "Default", title: "JOSHUA'S ARCADE", icon: "" },
+    { name: "Default", title: "JOSHUA'S ARCADE", icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='yellow'/%3E%3Ccircle cx='35' cy='40' r='5' fill='black'/%3E%3Ccircle cx='65' cy='40' r='5' fill='black'/%3E%3Cpath d='M 30 65 Q 50 80 70 65' stroke='black' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" },
     { name: "Google Classroom", title: "Classes", icon: "https://ssl.gstatic.com/classroom/favicon.png" },
     { name: "Edpuzzle", title: "Edpuzzle", icon: "https://edpuzzle.imgix.net/favicon.png" },
     { name: "Google", title: "Google", icon: "https://www.google.com/favicon.ico" },
