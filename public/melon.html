@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <base href="https://cdn.jsdelivr.net/gh/genizy/google-class@main/melon-playground/">
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <style>
+        html { box-sizing: border-box }
+        *, *:before, *:after { box-sizing: inherit }
+        html, body { height: 100%; margin: 0; background: #000; overflow: hidden; }
+        #unity-container { width: 100%; height: 100%; position: relative }
+        #unity-canvas { width: 100%; height: 100%; background: #231F20; display: block; }
+        #loading-cover { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; background: #000; }
+        #unity-loading-bar { flex: 1 1 auto; display: flex; flex-direction: column; justify-content: center; align-items: center }
+        #unity-progress-bar-empty { width: 40%; height: 24px; margin: 10px 20px 20px 10px; text-align: left; border: 1px solid white; padding: 2px }
+        #unity-progress-bar-full { width: 0; height: 100%; background: white }
+        .spinner { margin: 10px; font-size: 10px; position: relative; text-indent: -9999em; border-top: 1.1em solid rgba(255, 255, 255, 0.2); border-right: 1.1em solid rgba(255, 255, 255, 0.2); border-bottom: 1.1em solid rgba(255, 255, 255, 0.2); border-left: 1.1em solid #ffffff; transform: translateZ(0); animation: spinner-spin 1.1s infinite linear; border-radius: 50%; width: 5em; height: 5em; }
+        @keyframes spinner-spin { 0% { transform: rotate(0deg) } 100% { transform: rotate(360deg) } }
+    </style>
+    <title>Melon Playground</title>
+</head>
+<body class="dark">
+    <div id="unity-container" class="unity-desktop"> 
+        <canvas id="unity-canvas"></canvas> 
+    </div>
+    <div id="loading-cover">
+        <div id="unity-loading-bar">
+            <div id="unity-progress-bar-empty">
+                <div id="unity-progress-bar-full"></div>
+            </div>
+            <div class="spinner"></div>
+        </div>
+    </div>
+    <script>
+        const buildUrl = "main";
+        const loaderUrl = buildUrl + "/Builds.loader.js";
+        const config = {
+            dataUrl: buildUrl + "/Builds.data.unityweb",
+            frameworkUrl: buildUrl + "/Builds.framework.js.unityweb",
+            codeUrl: buildUrl + "/Builds.wasm.unityweb",
+            streamingAssetsUrl: "/StreamingAssets",
+        };
+        const canvas = document.querySelector("#unity-canvas");
+        const loadingCover = document.querySelector("#loading-cover");
+        const progressBarFull = document.querySelector("#unity-progress-bar-full");
+        const spinner = document.querySelector('.spinner');
+
+        const script = document.createElement("script");
+        script.src = loaderUrl;
+        script.onload = () => {
+            createUnityInstance(canvas, config, (progress) => {
+                spinner.style.display = "none";
+                progressBarFull.style.width = `${100 * progress}%`;
+            }).then((unityInstance) => {
+                loadingCover.style.display = "none";
+            }).catch((message) => {
+                console.error(message);
+            });
+        };
+        document.body.appendChild(script);
+    </script>
+</body>
+</html>
