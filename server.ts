@@ -15,6 +15,9 @@ async function startServer() {
     res.json({ status: "ok" });
   });
 
+  // Serve the public directory explicitly
+  app.use(express.static(path.join(process.cwd(), "public")));
+
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
       server: { middlewareMode: true },
