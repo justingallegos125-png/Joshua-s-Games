@@ -223,7 +223,7 @@ export default function App() {
       link.rel = 'icon';
       document.getElementsByTagName('head')[0].appendChild(link);
     }
-    link.href = cloakFavicon || "/vite.svg";
+    link.href = cloakFavicon || "favicon.svg";
     
     localStorage.setItem('cloakTitle', cloakTitle);
     localStorage.setItem('cloakFavicon', cloakFavicon);
